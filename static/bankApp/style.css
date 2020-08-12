@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Piedra&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --amount-font:3rem;
+    --date-font:1.5rem;
+    --check-font:1.2rem;
+    --balance-font:1rem;
+}
+
+body{
+    background-color: #3B4F54;
+    color: whitesmoke;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-title{
+    font-family: 'Satisfy',cursive;
+}
+nav{
+    margin-bottom: 0.5rem;
+}
+nav .btn{
+    color: #FFF;
+    border:0;
+}
+.nav-button .btn{
+    margin-left: 1rem;
+}
+.list-group a{
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    border-bottom: 1px dashed #000;
+}
+
+.list-group-item{
+
+}

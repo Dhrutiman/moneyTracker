@@ -1,0 +1,44 @@
+{% extends 'bankApp/index.html' %}
+{% block title %}
+	{{transaction}}
+{% endblock title %}
+{% block content %}
+	<center>
+		<h1>
+			Add Category of Payment
+		</h1>
+	</center>
+	<hr/>
+	<div>
+		<p>
+			<h3>
+				{{transaction.dateTime}}
+			</h3>
+		</p>
+		<p>
+			<h5>
+				{{transaction.description}}
+			</h5>
+		</p>
+		<p>
+			<h2>
+				{{transaction.modified_date}}
+			</h2>
+		</p>
+		<p>
+			<h2>
+				{{transaction.type}}
+			</h2>
+		</p>
+		<p>
+			<h2>
+				{{transaction.amount}}
+			</h2>
+		</p>
+	</div>
+	<form action="" method="post">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" name="UPDATE">
+	</form>
+{% endblock content %}

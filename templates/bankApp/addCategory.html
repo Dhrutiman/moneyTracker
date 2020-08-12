@@ -1,0 +1,76 @@
+
+<div class="list-view">
+    <div class="list-body">
+        <div class="body-amount">
+            {% if statement.type == "DEBIT" %}
+                <font color="red">
+                    -₹{{statement.amount}}
+                </font>
+            {% else %}
+                <font color="green">
+                    +₹{{statement.amount}}
+                </font>
+            {% endif %}
+            <div class="body-balance">
+                ₹ {{statement.balance}}
+            </div>
+        </div>
+        <div class="body-date">
+            {{statement.date}} at {{statement.time}}
+        </div>
+        
+        <div class="body-checkNo">
+            {{statement.check_no}}
+            <span class="small-text">
+                ({{statement.payment_mode}})
+            </span>
+        </div>
+        <div class="body-disc">
+            {{statement.description}}
+        </div>
+        <div class="input">
+            <input type="text" class="subject-input" placeholder="Subject">
+        </div>
+        <div class="icons">
+            <div class="icon-button-container">
+                <button class="icon">
+                    <i class="fas fa-car"></i>
+                </button>
+                <button class="icon">
+                    <i class="fas fa-utensils" aria-hidden="true"></i>
+                </button>
+                <button class="icon">
+                    <i class="fas fa-phone " aria-hidden="true"></i>
+                </button>
+                <button class="icon">
+                    <i class="fas fa-film " aria-hidden="true"></i>
+                </button>
+                <button class="icon">
+                    <i class="fas fa-money-bill-alt" aria-hidden="true"></i>
+                </button>
+                <button class="icon">
+                    <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+                </button>
+                <button class="icon">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                </button>
+                <button class="icon">
+                    <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                </button>
+                <button class="icon">
+                    <i class="fas fa-gift" aria-hidden="true"></i>
+                </button>
+                <button class="icon">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
+                <button class="icon">
+                    <i class="fas fa-retweet" aria-hidden="true"></i>
+                </button>
+                <button class="icon">
+                    <i class="fas fa-coins" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</div>

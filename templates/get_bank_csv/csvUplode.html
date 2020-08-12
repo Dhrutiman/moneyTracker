@@ -1,0 +1,44 @@
+{% extends 'bankApp/index.html' %}
+{% block title %}
+    Uplode CSV
+{% endblock title %}
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div>
+<!--                | means OR operator-->
+                <center>
+                    <h2>
+                        <strong>{{message|safe}}</strong>
+                    </h2>
+                </center>
+            </div>
+        {% endfor %}
+    {% else %}
+    {{order}}
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name='file'>
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div>
+            </div>
+            <button class="btn btn-light" type="submit">Upload</button>
+        </div>
+    </form>
+
+
+    {% endif %}
+
+    {% for statement in statements %}
+        <p>
+            {% include "bankApp/addCategory.html" %}
+
+        </p>
+    {% endfor %}
+{% endblock %}

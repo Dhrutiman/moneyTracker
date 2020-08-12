@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{% static '/bankApp/style.css' %}">
+    <title>
+        {% block title %}Home{% endblock title %}
+    </title>
+    
+    
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{% static '/bankApp/DS_bank_logo_white.svg' %}" width="50" height="30" class="d-inline-block align-top" alt="" loading="lazy"/>
+                <span class="navbar-title">
+                    Money App
+                </span>  
+            </a>
+            <form class="form-inline my-2 my-lg-0 nav-button">
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:uplode_csv' %}">
+                    Uplode CSV <i class="far fa-plus-square" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:csvHome' %}">
+                    HOME <i class="fas fa-home" aria-hidden="true"></i>
+                </a>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+
+  </body>
+</body>
+
+</html>

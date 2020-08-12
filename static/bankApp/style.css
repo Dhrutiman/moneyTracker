@@ -35,6 +35,10 @@ nav .btn{
     margin-left: 1rem;
 }
 
+.nav-button{
+    float: right;
+}
+
 hr{
     height:2px;
     border-width:0;

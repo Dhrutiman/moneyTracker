@@ -15,7 +15,12 @@
             </div>
         {% endfor %}
     {% else %}
-    {{order}}
+    <center>
+        <h2>
+            {{order}}
+        </h2>
+    </center>
+    <hr>
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             {% csrf_token %}

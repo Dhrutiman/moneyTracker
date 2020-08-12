@@ -15,7 +15,7 @@ def uplode_csv(request):
 	template="get_bank_csv/csvUplode.html"
 
 	prompt={
-		'order':""
+		'order':"Uplode CSV file of bank statement"
 	}
 
 	if request.method == 'GET':
@@ -34,7 +34,7 @@ def uplode_csv(request):
 
 	statements=[]
 
-## date_time,check_no,description, b_Code, debit, credit, balance
+	## date_time,check_no,description, b_Code, debit, credit, balance
 
 	for row in csv.reader(io_string,delimiter=','):
 		
@@ -64,12 +64,16 @@ def uplode_csv(request):
 
 
 
-class bank_statement_page(ListView):
+class bank_statement_without_category_page(ListView):
 	#model = transaction
 	queryset = transaction.objects.filter(category='None')
 	template_name='get_bank_csv/statement.html'
 	context_object_name="statements"
 
+class bank_statement_page(ListView):
+	model = transaction
+	template_name='get_bank_csv/home.html'
+	context_object_name="statements"
 
 class bank_statement_update_page(UpdateView):
 	model= transaction

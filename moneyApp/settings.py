@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    #third-party app
+    'crispy_forms',
+    
+    # local apps
     'get_bank_csv.apps.GetBankCsvConfig'
     #'get_bank_csv'
 ]
@@ -52,6 +57,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'moneyApp.urls'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {

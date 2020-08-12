@@ -34,6 +34,32 @@ nav .btn{
 .nav-button .btn{
     margin-left: 1rem;
 }
+
+hr{
+    height:2px;
+    border-width:0;
+    color:#FFF;
+    background-color:#FFF;
+}
+.statement-display{
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+.statement-display .disc{
+    overflow-wrap: break-word;
+}
+.statement-display div.row{
+    margin-bottom: 0.5rem;
+}
+.statement-display strong{
+    color: #E0E0E0;
+    font-size: 1.2rem;
+}
+
+.aline-end{
+    text-align: right;
+}
+
 .list-group a{
     padding-bottom: 1rem;
     padding-top: 1rem;

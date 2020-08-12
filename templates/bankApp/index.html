@@ -11,7 +11,7 @@
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    
+
     <link rel="stylesheet" href="{% static '/bankApp/style.css' %}">
     <title>
         {% block title %}Home{% endblock title %}
@@ -27,15 +27,18 @@
             <a class="navbar-brand" href="#">
                 <img src="{% static '/bankApp/DS_bank_logo_white.svg' %}" width="50" height="30" class="d-inline-block align-top" alt="" loading="lazy"/>
                 <span class="navbar-title">
-                    Money App
+                    Money Tracker
                 </span>  
             </a>
-            <form class="form-inline my-2 my-lg-0 nav-button">
+            <form class="form-inline my-2 my-lg-0 nav-button ">
                 <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:uplode_csv' %}">
-                    Uplode CSV <i class="far fa-plus-square" aria-hidden="true"></i>
+                    <i class="fas fa-upload"></i> Uplode CSV
+                </a>
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:withoutCategoryList' %}">
+                    <i class="fas fa-home" aria-hidden="true"></i> Add Category
                 </a>
                 <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:csvHome' %}">
-                    HOME <i class="fas fa-home" aria-hidden="true"></i>
+                    <i class="fas fa-home" aria-hidden="true"></i> HOME
                 </a>
             </form>
         </div>

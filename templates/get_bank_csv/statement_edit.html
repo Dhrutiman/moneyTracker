@@ -1,44 +1,35 @@
 {% extends 'bankApp/index.html' %}
+{% load crispy_forms_tags %}
 {% block title %}
 	{{transaction}}
 {% endblock title %}
 {% block content %}
 	<center>
 		<h1>
-			Add Category of Payment
+			Add Category For Payment
 		</h1>
 	</center>
 	<hr/>
-	<div>
-		<p>
-			<h3>
-				{{transaction.dateTime}}
-			</h3>
-		</p>
-		<p>
-			<h5>
-				{{transaction.description}}
-			</h5>
-		</p>
-		<p>
-			<h2>
-				{{transaction.modified_date}}
-			</h2>
-		</p>
-		<p>
-			<h2>
-				{{transaction.type}}
-			</h2>
-		</p>
-		<p>
-			<h2>
-				{{transaction.amount}}
-			</h2>
-		</p>
+
+	<div class="statement-display">
+		<div class="row row-cols-2">
+			<div class="col"><strong>Amount</strong>:- {{transaction.amount}} (<small><i> {{transaction.type}} </i></small>)</div>
+			<div class="col"><strong>Date-Time</strong>:- {{transaction.dateTime}}</div>
+		</div>
+		<div class="row">
+			<div class="col disc"><strong>Description</strong>:- {{transaction.description}}</div>
+		</div>
+		<div class="row">
+			
+  			<div class="col col-lg-4 offset-lg-8 aline-end"><strong>Last edited</strong> {{transaction.modified_date}}</div>
+		</div>
 	</div>
-	<form action="" method="post">
+	<hr/>
+	<form action="" method="post" novalidate>
 		{% csrf_token %}
-		{{form.as_p}}
-		<input type="submit" name="UPDATE">
+		{{ form|crispy }}
+		<button class="btn btn-light"  type="submit">
+			UPDATE
+		</button>
 	</form>
 {% endblock content %}

@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import permission_required
 from .models import data,transaction
 import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from django.views.generic import ListView
 from django.views.generic.edit import UpdateView
 
@@ -75,8 +76,10 @@ class bank_statement_page(ListView):
 	template_name='get_bank_csv/home.html'
 	context_object_name="statements"
 
-class bank_statement_update_page(UpdateView):
+class bank_statement_update_page(PermissionRequiredMixin,UpdateView):
 	model= transaction
 	context_object_name="transaction"
 	template_name="get_bank_csv/statement_edit.html"
 	fields = ['category','sbject']
+	permission_required = ('admin.can_add_log_entry',)
+	login_url = '/admin'

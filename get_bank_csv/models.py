@@ -10,7 +10,7 @@ class transaction(models.Model):
         ('CREDIT', 'CREDIT'),
 	]
 	category_choices=[
-		('Travels','TRAVELS'),
+		('Transport','TRANSPORT'),
 		('Food','FOOD'),
 		('Donation','DONATION'),
 		('Grocery','GROCERY'),
@@ -23,15 +23,24 @@ class transaction(models.Model):
 		('Help','HELP'),
 		('Investment','INVESTMENT'),
 		('Education','EDUCATION'),
+		('Health&Medicine','HEALTH AND MEDICINE'),
 		('Loan','LOAN'),
 		('EarnedIncome','EARNED INCOME'),
 		('BusinessIncome','BUSINESS INCOME'),
 		('InvestmentIncome','INVESTMENT INCOME'),
+		('SoldIteams','SOLD ITEMS'),
+		('Coupons','COUPONS'),
 		('Salary','SALARY'),
 		('Wage','WAGE'),
 		('Others','OTHERS'),
 		('None','NONE'),
 	]
+	## sort the category_choices
+	def sortFunc(e):
+		return(e[0])
+
+	category_choices.sort(key=sortFunc)
+
 	id=models.CharField(primary_key=True,max_length=30)
 	dateTime=models.DateTimeField()
 	amount=models.FloatField()

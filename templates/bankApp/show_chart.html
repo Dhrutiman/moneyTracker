@@ -4,22 +4,97 @@
 {% endblock title %}
 
 {% block content %}
-	
-    <canvas id="myChart" style="background-color: #151515"></canvas>
+
+	<center>
+		<h2>
+			Add Category For Payment
+		</h2>
+	</center>
+	<hr/>
+
+	<div class="row row-cols-1 row-cols-md-1 row-cols-lg-2">
+		<div class="col col-lg-8">
+			<canvas id="Chart1" style="background-color: #151515; height: 80vh;">
+		</div>
+		<div class="col col-lg-4">
+			<canvas id="Chart2" style="background-color: #151515;">
+		</div>
+	</div>
+    
+    <!--<canvas id="myChart" style="background-color: #151515;height: 80vh;"></canvas>-->
 {% endblock content %}
 
 {% block script %}
     <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
+        var ctx = document.getElementById('Chart1').getContext('2d');
 		var chart = new Chart(ctx, {
 		    // The type of chart we want to create
-		    type: 'pie',
+		    type: 'doughnut',
 
 		    // The data for our dataset
 		    data: {
 		        labels: {{ chartData.labels|safe }},
 		        datasets: [{
-		            label: 'My First dataset',
+		            label: 'Expensess of Aug',
+		            backgroundColor: {{ chartData.color|safe }},
+		            borderColor: "#000",
+		            data: {{chartData.data|safe }},
+		        }]
+		    },
+
+		    // Configuration options go here
+		    options: {
+		    	layout: {
+		            padding: {
+		                left: 0,
+		                right: 0,
+		                top: 20,
+		                bottom: 20,
+		          	}
+		        },
+		        legend: {
+		            display: true,
+		            position: 'right',
+		            Align:'end',
+		            labels: {
+		                fontColor: '#E0E0E0',
+		                boxWidth: 20,
+		                fontSize: 15,
+		            }
+		        },
+		        title: {
+		            display: true,
+		            text: 'Expensess of Aug',
+		            fontSize:30,
+		            fontColor: '#E0E0E0',
+		            fontStyle:'normal',
+		        },
+		        options: {
+				    responsive: true,
+				    maintainAspectRatio: false,
+				    scales: {
+				        yAxes: [{
+				            ticks: {
+				                beginAtZero:true
+				            }
+				        }]
+				    }
+				}
+
+			}
+		});
+    </script>
+    <script>
+        var ctx = document.getElementById('Chart2').getContext('2d');
+		var chart = new Chart(ctx, {
+		    // The type of chart we want to create
+		    type: 'horizontalBar',
+
+		    // The data for our dataset
+		    data: {
+		        labels: {{ chartData.labels|safe }},
+		        datasets: [{
+		            label: 'Income stack',
 		            backgroundColor: {{ chartData.color|safe }},
 		            borderColor: "#000",
 		            data: {{chartData.data|safe }},

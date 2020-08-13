@@ -73,3 +73,17 @@ hr{
 .list-group-item{
 
 }
+
+canvas#Chart1{
+
+  width:100% !important;
+  height:80vh !important;
+
+}
+
+canvas#Chart2{
+
+  width:100% !important;
+  height:50vh !important;
+
+}

@@ -3,7 +3,7 @@ from .models import transaction
 
 class graph_data:
 
-	def get_graph_data(type='month',art=datetime.now().month):
+	def get_expenses_graph_data(type='month',art=datetime.now().month):
 		dh=transaction.objects.all()
 		category=['BusinessIncome', 'Call&Internet', 'Clothing', 'Coupons', 'Donation', 'EarnedIncome', 'Education', 'Entertanment', 'Food', 'Grocery', 'Health&Medicine', 'Help', 'Investment', 'InvestmentIncome', 'Loan', 'MonthlyRent', 'None', 'Others', 'Salary', 'Shopping', 'SoldIteams', 'Transport', 'UtilityBills', 'Wage']
 		
@@ -42,8 +42,9 @@ class graph_data:
 		for i in dh:
 			if i.category in expense_category:
 				dic[i.category]=dic[i.category]+i.amount
+		
 
-		sz=sorted(dic.items(), key=lambda x: x[1], reverse=False)
+		sz=sorted(dic.items(), key=lambda x: x[1], reverse=True)
 		
 		lable=[la[0] for la in sz]
 		data=[la[1] for la in sz]

@@ -93,5 +93,5 @@ class chartViews(TemplateView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs,)
-		context['chartData'] = graph_data.get_graph_data()
+		context['chartData'] = graph_data.get_expenses_graph_data()
 		return context

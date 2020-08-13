@@ -1,0 +1,35 @@
+{% extends 'bankApp/index.html' %}
+{% block title %}
+	charts
+{% endblock title %}
+
+{% block content %}
+	
+    <canvas id="myChart" style="background-color: #151515"></canvas>
+{% endblock content %}
+
+{% block script %}
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+		var chart = new Chart(ctx, {
+		    // The type of chart we want to create
+		    type: 'pie',
+
+		    // The data for our dataset
+		    data: {
+		        labels: {{ chartData.labels|safe }},
+		        datasets: [{
+		            label: 'My First dataset',
+		            backgroundColor: {{ chartData.color|safe }},
+		            borderColor: "#000",
+		            data: {{chartData.data|safe }},
+		        }]
+		    },
+
+		    // Configuration options go here
+		    options: {
+
+		    }
+		});
+    </script>
+{% endblock script %}

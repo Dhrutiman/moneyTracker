@@ -52,7 +52,7 @@ hr{
 .statement-display .disc{
     overflow-wrap: break-word;
 }
-.statement-display div.row{
+.statement-display div{
     margin-bottom: 0.5rem;
 }
 .statement-display strong{

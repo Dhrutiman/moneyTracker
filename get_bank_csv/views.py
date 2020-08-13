@@ -4,12 +4,13 @@ import csv,io
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
 from .models import data,transaction
-import datetime
+from datetime import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import UpdateView
 
+from .function import graph_data
 # Create your views here.
 @permission_required('admin.can_add_log_entry')
 def uplode_csv(request):
@@ -47,7 +48,7 @@ def uplode_csv(request):
 		statement=_data.serialize()
 		created = transaction.objects.update_or_create(
 		 		id=_data.id,
-				dateTime=datetime.datetime.combine(_data.date,_data.time),
+				dateTime=datetime.combine(_data.date,_data.time),
 				amount=_data.amount,
 				type=_data.tr_type,
 				check_no=_data.check_no,
@@ -83,3 +84,14 @@ class bank_statement_update_page(PermissionRequiredMixin,UpdateView):
 	fields = ['category','sbject']
 	permission_required = ('admin.can_add_log_entry',)
 	login_url = '/admin'
+
+class chartViews(TemplateView):
+	template_name="bankApp/show_chart.html"
+	expense_data={
+
+	}
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs,)
+		context['chartData'] = graph_data.get_graph_data()
+		return context

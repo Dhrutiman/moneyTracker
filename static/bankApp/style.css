@@ -74,6 +74,11 @@ hr{
 
 }
 
+canvas{
+    border:5px double #E0E0E0;
+    border-radius: 1rem;
+}
+
 canvas#Chart1{
 
   width:100% !important;
@@ -82,6 +87,12 @@ canvas#Chart1{
 }
 
 canvas#Chart2{
+
+  width:100% !important;
+  height:30vh !important;
+
+}
+canvas#Chart3{
 
   width:100% !important;
   height:50vh !important;

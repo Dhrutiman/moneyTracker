@@ -13,11 +13,16 @@
 	<hr/>
 
 	<div class="row row-cols-1 row-cols-md-1 row-cols-lg-2">
-		<div class="col col-lg-8">
-			<canvas id="Chart1" style="background-color: #151515; height: 80vh;">
+		<div class="col col-lg-6">
+			<canvas id="Chart1" >
 		</div>
-		<div class="col col-lg-4">
-			<canvas id="Chart2" style="background-color: #151515;">
+		<div class="col col-lg-6">
+			<div class="row">
+				<canvas id="Chart2" >
+			</div>
+			<div class="row">
+				<canvas id="Chart3" >
+			</div>
 		</div>
 	</div>
     
@@ -33,12 +38,13 @@
 
 		    // The data for our dataset
 		    data: {
-		        labels: {{ chartData.labels|safe }},
+		        labels: {{ chartData.expense.labels|safe }},
 		        datasets: [{
 		            label: 'Expensess of Aug',
-		            backgroundColor: {{ chartData.color|safe }},
-		            borderColor: "#000",
-		            data: {{chartData.data|safe }},
+		            backgroundColor: {{ chartData.expense.color|safe }},
+		            borderColor: "#3B4F54",
+		            borderWidth: 4,
+		            data: {{chartData.expense.data|safe }},
 		        }]
 		    },
 
@@ -46,7 +52,7 @@
 		    options: {
 		    	layout: {
 		            padding: {
-		                left: 0,
+		                left: 10,
 		                right: 0,
 		                top: 20,
 		                bottom: 20,
@@ -54,7 +60,7 @@
 		        },
 		        legend: {
 		            display: true,
-		            position: 'right',
+		            position: 'bottom',
 		            Align:'end',
 		            labels: {
 		                fontColor: '#E0E0E0',
@@ -69,42 +75,117 @@
 		            fontColor: '#E0E0E0',
 		            fontStyle:'normal',
 		        },
-		        options: {
-				    responsive: true,
-				    maintainAspectRatio: false,
-				    scales: {
-				        yAxes: [{
-				            ticks: {
-				                beginAtZero:true
-				            }
-				        }]
-				    }
-				}
-
+	            responsive: true,
+			    maintainAspectRatio: false,
 			}
+
+			
 		});
     </script>
     <script>
         var ctx = document.getElementById('Chart2').getContext('2d');
+        Chart.defaults.global.defaultFontColor = '#E0E0E0';
+        Chart.defaults.global.defaultFontSize = 15;
 		var chart = new Chart(ctx, {
 		    // The type of chart we want to create
 		    type: 'horizontalBar',
 
 		    // The data for our dataset
 		    data: {
-		        labels: {{ chartData.labels|safe }},
+		        labels: {{ chartData.income.labels|safe }},
 		        datasets: [{
 		            label: 'Income stack',
-		            backgroundColor: {{ chartData.color|safe }},
+		            backgroundColor: {{ chartData.income.color|safe }},
 		            borderColor: "#000",
-		            data: {{chartData.data|safe }},
+		            data: {{chartData.income.data|safe }},
 		        }]
 		    },
 
 		    // Configuration options go here
 		    options: {
+		    	layout: {
+		            padding: {
+		                left: 5,
+		                right: 5,
+		                top: 10,
+		                bottom: 0,
+		          	}
+		        },
+		        legend: {
+		            display: true,
+		            position: 'top',
+		            Align:'end',
+		            labels: {
+		                fontColor: '#E0E0E0',
+		                boxWidth: 0,
+		                fontSize: 20,
+		                fontStyle:'normal',
+		            }
+		        },
+		        scales: {
+		            xAxes: [{
+		                stacked: true
+		            }],
+		            yAxes: [{
+		                stacked: true
+		            }]
+		        },
+	            responsive: true,
+			    maintainAspectRatio: false,
+			}
+		});
+    </script>
+    <script>
+        var ctx = document.getElementById('Chart3').getContext('2d');
+        Chart.defaults.global.defaultFontColor = '#E0E0E0';
+        Chart.defaults.global.defaultFontSize = 15;
+		var chart = new Chart(ctx, {
+		    // The type of chart we want to create
+		    type: 'line',
 
-		    }
+		    // The data for our dataset
+		    data: {
+		        labels: {{ chartData.dalyTransaction.labels|safe }},
+		        datasets: [{
+		            label: 'Daly Transiaction',
+		            //backgroundColor: '#F00',
+		            borderColor: "#F00",
+		            data: {{chartData.dalyTransaction.data|safe }},
+		        	},
+		        	{
+		            label: 'Balance',
+		            //backgroundColor: '#F00',
+		            borderColor: "#FFF",
+		            data: {{chartData.dalyTransaction.data1|safe }},
+		        	},
+		        ]
+		    },
+
+		    // Configuration options go here
+		    options: {
+		    	layout: {
+		            padding: {
+		                left: 5,
+		                right: 5,
+		                top: 10,
+		                bottom: 0,
+		          	}
+		        },
+		        legend: {
+		            display: true,
+		            position: 'top',
+		            Align:'end',
+		            labels: {
+		                fontColor: '#E0E0E0',
+		                boxWidth: 0,
+		                fontSize: 15,
+		                fontStyle:'normal',
+		            }
+		        },
+
+	            responsive: true,
+			    maintainAspectRatio: false,
+			}
 		});
     </script>
 {% endblock script %}

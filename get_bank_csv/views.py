@@ -90,8 +90,12 @@ class chartViews(TemplateView):
 	expense_data={
 
 	}
-
+	graph_data.get_dalyTransaction_graph_data()
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs,)
-		context['chartData'] = graph_data.get_expenses_graph_data()
+		context['chartData'] = {
+			'expense':graph_data.get_expenses_graph_data(),
+			'income':graph_data.get_incom_graph_data(),
+			'dalyTransaction':graph_data.get_dalyTransaction_graph_data(),
+		}
 		return context

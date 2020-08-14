@@ -98,3 +98,16 @@ canvas#Chart3{
   height:50vh !important;
 
 }
+.error{
+    font-size: 1rem;
+    color: red;
+    text-align: center;
+}
+.month-form form{
+    float: right;
+}
+.month-form form .form-style{
+    margin-right: 1rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}

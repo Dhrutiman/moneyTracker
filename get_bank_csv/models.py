@@ -24,6 +24,8 @@ class transaction(models.Model):
 		('Investment','INVESTMENT'),
 		('Education','EDUCATION'),
 		('Health&Medicine','HEALTH AND MEDICINE'),
+		('CashWithdraw','CASH WITHDRAW'),
+		('RefundORCancle','REFUND OR CANCLE'),
 		('Loan','LOAN'),
 		('EarnedIncome','EARNED INCOME'),
 		('BusinessIncome','BUSINESS INCOME'),

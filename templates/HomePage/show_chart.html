@@ -5,26 +5,84 @@
 
 {% block content %}
 
-	<center>
-		<h2>
-			Add Category For Payment
-		</h2>
-	</center>
-	<hr/>
+	<div class="row">
+		<div class="col col-lg-4 col-md-4 col-1">
+		</div>
+		<div class="col col-lg-4 col-md-4 col-1 justify-content-center align-self-center">
+			<center>
+				<h2>
+					{{chartData.month.0}}
+				</h2>
+			</center>
+		</div>
+		<div class="month-form col col-lg-4 col-md-4 col-1">
+			<form class="form-inline align-self-center justify-content-end">
+			  <!--<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Month</label>-->
+			  <select class="form-style custom-select" id="inlineFormCustomSelectPref" name="month">
+			    <option selected value="1">Jan</option>
+			    <option value="2">Feb</option>
+			    <option value="3">Mar</option>
+			    <option value="4">Apr</option>
+			    <option value="5">May</option>
+			    <option value="6">Jun</option>
+			    <option value="7">Jul</option>
+			    <option value="8">Aug</option>
+			    <option value="9">Sep</option>
+			    <option value="10">Oct</option>
+			    <option value="11">Nov</option>
+			    <option value="12">Dec</option>
+			  </select>
 
-	<div class="row row-cols-1 row-cols-md-1 row-cols-lg-2">
-		<div class="col col-lg-6">
-			<canvas id="Chart1" >
+			  <!--<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Month</label>-->
+			  <input type="number" 
+			  class="form-style form-control" id="inlineFormInputName2" 
+			  style="width: 6rem;" 
+			  placeholder="year" name="year" >
+
+			  <button type="submit" class="form-style btn btn-success">
+			  	<i class="fas fa-external-link-alt" style="font-size: 1rem"></i>
+			  </button>
+			</form>
 		</div>
-		<div class="col col-lg-6">
-			<div class="row">
-				<canvas id="Chart2" >
-			</div>
-			<div class="row">
-				<canvas id="Chart3" >
-			</div>
-		</div>
+		
 	</div>
+	<hr/>
+	{% if chartData.errorMessages %}
+
+		{% for message in chartData.errorMessages %}
+			<h4>
+				<div class="error">{{message|safe}}</div>
+			</h4>
+		{% endfor %}
+		<hr/>
+
+	{% else %}
+		
+		{% if chartData.messages %}
+			{% for message in chartData.messages %}
+				<h4>
+					<div class="error">{{message|safe}}</div>
+				</h4>
+			{% endfor %}
+			<hr/>
+		{% endif %}
+
+		<div class="row row-cols-1 row-cols-md-1 row-cols-lg-2">
+			<div class="col col-lg-6">
+				<canvas id="Chart1" >
+			</div>
+			<div class="col col-lg-6">
+				<div class="row">
+					<canvas id="Chart2" >
+				</div>
+				<div class="row">
+					<canvas id="Chart3" >
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	
+	
     
     <!--<canvas id="myChart" style="background-color: #151515;height: 80vh;"></canvas>-->
 {% endblock content %}
@@ -94,13 +152,13 @@
 		    data: {
 		        labels: {{ chartData.income.data1.labels|safe }},
 		        datasets: [{
-			            label: 'Income stack1',
+			            label: '{{chartData.month.0}}',
 			            backgroundColor: "rgb(255, 99, 132)",
 			            borderColor: "#000",
 			            data: {{chartData.income.data1.data|safe }},
 		        	},
 			        {
-			            label: 'Income stack2',
+			            label: '{{chartData.month.1}}',
 			            backgroundColor: "#FFF",
 			            borderColor: "#000",
 			            data: {{chartData.income.data2.data|safe }},

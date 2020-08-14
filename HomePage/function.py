@@ -29,22 +29,41 @@ color_code={
 			'Wage': '#EA07FA'
 		}
 
+income_category=['BusinessIncome', 'Coupons', 'EarnedIncome', 'Investment', 'InvestmentIncome', 'Loan', 'Salary', 'SoldIteams','Wage']
+expense_category=['Transport', 'Food', 'Donation', 'Grocery', 'MonthlyRent', 'Shopping', 'UtilityBills', 'Call&Internet', 'Entertanment', 'Clothing', 'Help', 'Investment', 'Education', 'Health&Medicine','Others']
+
+
 class graph_data:
 
-	def get_expenses_graph_data(type='month',art=datetime.now().month-1):
-		dh=transaction.objects.filter(dateTime__month=art)
+	def __init__(self,month,year,type):
+		self.month=month
+		self.year=year
+		self.type=type
+		self.dataSet=transaction.objects.filter(dateTime__year=self.year,dateTime__month=self.month)
+
+	def get_expenses_graph_data(self):
+		dh=self.dataSet
 		
 		expense_category=['Transport', 'Food', 'Donation', 'Grocery', 'MonthlyRent', 'Shopping', 'UtilityBills', 'Call&Internet', 'Entertanment', 'Clothing', 'Help', 'Investment', 'Education', 'Health&Medicine','Others']
 
 		
 		dic={}
 		
-		for i in expense_category:
+		"""for i in expense_category:
 			dic[i]=0
 
 		for i in dh:
 			if i.category in expense_category:
 				dic[i.category]=dic[i.category]+i.amount
+				"""
+		for i in dh.filter(type='DEBIT'):
+			com=i.category
+			amo=i.amount
+
+			if com in dic:
+					dic[com]=dic[com]+amo
+			else:
+				dic[com]=amo
 		
 
 		sz=sorted(dic.items(), key=lambda x: x[1], reverse=True)
@@ -61,10 +80,10 @@ class graph_data:
 				'color':color,
 		})
 
-	def get_incom_graph_data(type='month',art=datetime.now().month-1):
+	def get_incom_graph_data(self):
 		
 		def get_done(mont):
-			dh=transaction.objects.filter(dateTime__month=mont)
+			dh=transaction.objects.filter(dateTime__year=self.year,dateTime__month=mont)
 			dic={}
 			dic['Income']=0
 			dic['Expenses']=0
@@ -76,21 +95,10 @@ class graph_data:
 					'data':list(dic.values()),
 				})
 
-			income_category=['BusinessIncome', 'Coupons', 'EarnedIncome', 'Investment', 'InvestmentIncome', 'Loan', 'Salary', 'SoldIteams','Wage']
-			expense_category=['Transport', 'Food', 'Donation', 'Grocery', 'MonthlyRent', 'Shopping', 'UtilityBills', 'Call&Internet', 'Entertanment', 'Clothing', 'Help', 'Investment', 'Education', 'Health&Medicine','Others']
-
+			
 			bal_f=dh.last()
 			bal_a=bal_f.amount if bal_f.type =="DEBIT" else -1*bal_f.amount
 			bal=bal_f.balance+bal_a
-
-			#dic['taxs']=0
-
-			"""for i in dh:
-				if i.category in income_category:
-					dic['Income']=dic['Income']+i.amount
-				elif i.category in expense_category:
-					dic['Expenses']=dic['Expenses']+i.amount
-			"""
 
 			for i in dh:
 				if i.type == "DEBIT":
@@ -106,12 +114,12 @@ class graph_data:
 					'data':list(dic.values()),
 			})
 		return {
-			'data1':get_done(art),
-			'data2':get_done(art-1),
+			'data1':get_done(self.month),
+			'data2':get_done(self.month -1),
 		}
 
-	def get_dalyTransaction_graph_data(type='month',art=datetime.now().month-1):
-		dh=transaction.objects.filter(dateTime__month=art)
+	def get_dalyTransaction_graph_data(self):
+		dh=self.dataSet
 		dic={}
 
 		"""

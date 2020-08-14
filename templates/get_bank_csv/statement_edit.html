@@ -15,14 +15,14 @@
 	<div class="statement-display">
 		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-2">
 			<div class="col"><strong>Amount</strong>:- {{transaction.amount}} (<small><i> {{transaction.type}} </i></small>)</div>
-			<div class="col"><strong>Date-Time</strong>:- {{transaction.dateTime}}</div>
+			<div class="col"><strong>Date-Time</strong>:- {{transaction.dateTime|date:'d M Y H:i'}}</div>
 		</div>
 		<div class="row">
 			<div class="col disc"><strong>Description</strong>:- {{transaction.description}}</div>
 		</div>
 		<div class="row">
 			
-  			<div class="col col-lg-4 offset-lg-8 aline-end"><strong>Last edited</strong> {{transaction.modified_date}}</div>
+  			<div class="col col-lg-4 offset-lg-8 aline-end"><strong>Last edited</strong> {{transaction.modified_date|date:'d M Y H:i'}}</div>
 		</div>
 	</div>
 	<hr/>

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     
     # local apps
-    'get_bank_csv.apps.GetBankCsvConfig'
+    'get_bank_csv.apps.GetBankCsvConfig',
+    'HomePage.apps.HomepageConfig',
     #'get_bank_csv'
 ]
 
@@ -120,7 +121,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

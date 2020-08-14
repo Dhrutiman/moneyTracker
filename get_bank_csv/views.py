@@ -10,11 +10,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixi
 from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import UpdateView
 
-from .function import graph_data
 # Create your views here.
 @permission_required('admin.can_add_log_entry')
 def uplode_csv(request):
 	template="get_bank_csv/csvUplode.html"
+
+	messages=[]
 
 	prompt={
 		'order':"Uplode CSV file of bank statement"
@@ -45,25 +46,30 @@ def uplode_csv(request):
     	row[3], row[4], 
     	row[5], row[6],
     	row[7])
-		statement=_data.serialize()
-		created = transaction.objects.update_or_create(
-		 		id=_data.id,
-				dateTime=datetime.combine(_data.date,_data.time),
-				amount=_data.amount,
-				type=_data.tr_type,
-				check_no=_data.check_no,
-				description=_data.description,
-				balance=_data.balance,
-				category='None',
-		 	)
-		
+
+		try :
+
+			created = transaction.objects.update_or_create(
+			 		id=_data.id,
+					dateTime=datetime.combine(_data.date,_data.time),
+					amount=_data.amount,
+					type=_data.tr_type,
+					check_no=_data.check_no,
+					description=_data.description,
+					balance=_data.balance,
+					category='None',
+			 	)
+
+		except Exception as e:
+			print(_data.id)
+			messages.append(_data.id +'| is not been saved|')
 
 	context={
-
+		'messages':messages
 	}
 	#return(redirect("http://127.0.0.1:8000/get_csv"))
 	return redirect('/get_csv')
-
+	#return render(request, template, context)
 
 
 class bank_statement_without_category_page(ListView):
@@ -73,7 +79,8 @@ class bank_statement_without_category_page(ListView):
 	context_object_name="statements"
 
 class bank_statement_page(ListView):
-	model = transaction
+	#model = transaction
+	queryset = transaction.objects.all()
 	template_name='get_bank_csv/home.html'
 	context_object_name="statements"
 
@@ -85,17 +92,3 @@ class bank_statement_update_page(PermissionRequiredMixin,UpdateView):
 	permission_required = ('admin.can_add_log_entry',)
 	login_url = '/admin'
 
-class chartViews(TemplateView):
-	template_name="bankApp/show_chart.html"
-	expense_data={
-
-	}
-	graph_data.get_dalyTransaction_graph_data()
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs,)
-		context['chartData'] = {
-			'expense':graph_data.get_expenses_graph_data(),
-			'income':graph_data.get_incom_graph_data(),
-			'dalyTransaction':graph_data.get_dalyTransaction_graph_data(),
-		}
-		return context

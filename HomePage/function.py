@@ -1,5 +1,5 @@
 from datetime import datetime
-from .models import transaction
+from get_bank_csv.models import transaction
 
 
 ##category=['BusinessIncome', 'Call&Internet', 'Clothing', 'Coupons', 'Donation', 'EarnedIncome', 'Education', 'Entertanment', 'Food', 'Grocery', 'Health&Medicine', 'Help', 'Investment', 'InvestmentIncome', 'Loan', 'MonthlyRent', 'None', 'Others', 'Salary', 'Shopping', 'SoldIteams', 'Transport', 'UtilityBills', 'Wage']
@@ -31,10 +31,10 @@ color_code={
 
 class graph_data:
 
-	def get_expenses_graph_data(type='month',art=datetime.now().month):
-		dh=transaction.objects.all()
+	def get_expenses_graph_data(type='month',art=datetime.now().month-1):
+		dh=transaction.objects.filter(dateTime__month=art)
 		
-		expense_category=['Transport', 'Food', 'Donation', 'Grocery', 'MonthlyRent', 'Shopping', 'UtilityBills', 'Call&Internet', 'Entertanment', 'Clothing', 'Help', 'Investment', 'Education', 'Health&Medicine']
+		expense_category=['Transport', 'Food', 'Donation', 'Grocery', 'MonthlyRent', 'Shopping', 'UtilityBills', 'Call&Internet', 'Entertanment', 'Clothing', 'Help', 'Investment', 'Education', 'Health&Medicine','Others']
 
 		
 		dic={}
@@ -61,40 +61,68 @@ class graph_data:
 				'color':color,
 		})
 
-	def get_incom_graph_data(type='month',art=datetime.now().month):
-		dh=transaction.objects.all()
-		income_category=['BusinessIncome', 'Coupons', 'EarnedIncome', 'Help', 'Investment', 'InvestmentIncome', 'Loan', 'Others', 'Salary', 'SoldIteams','Wage']
+	def get_incom_graph_data(type='month',art=datetime.now().month-1):
+		
+		def get_done(mont):
+			dh=transaction.objects.filter(dateTime__month=mont)
+			dic={}
+			dic['Income']=0
+			dic['Expenses']=0
+			dic['saveing']=0
+			
+			if len(dh)==0:
+				return({
+					'labels':list(dic.keys()),
+					'data':list(dic.values()),
+				})
+
+			income_category=['BusinessIncome', 'Coupons', 'EarnedIncome', 'Investment', 'InvestmentIncome', 'Loan', 'Salary', 'SoldIteams','Wage']
+			expense_category=['Transport', 'Food', 'Donation', 'Grocery', 'MonthlyRent', 'Shopping', 'UtilityBills', 'Call&Internet', 'Entertanment', 'Clothing', 'Help', 'Investment', 'Education', 'Health&Medicine','Others']
+
+			bal_f=dh.last()
+			bal_a=bal_f.amount if bal_f.type =="DEBIT" else -1*bal_f.amount
+			bal=bal_f.balance+bal_a
+
+			#dic['taxs']=0
+
+			"""for i in dh:
+				if i.category in income_category:
+					dic['Income']=dic['Income']+i.amount
+				elif i.category in expense_category:
+					dic['Expenses']=dic['Expenses']+i.amount
+			"""
+
+			for i in dh:
+				if i.type == "DEBIT":
+					dic['Expenses']=dic['Expenses']+i.amount
+				else:
+					dic['Income']=dic['Income']+i.amount
+
+			dic['saveing']=bal+(dic['Income']-dic['Expenses'])
+
+
+			return({
+					'labels':list(dic.keys()),
+					'data':list(dic.values()),
+			})
+		return {
+			'data1':get_done(art),
+			'data2':get_done(art-1),
+		}
+
+	def get_dalyTransaction_graph_data(type='month',art=datetime.now().month-1):
+		dh=transaction.objects.filter(dateTime__month=art)
 		dic={}
-		
-		for i in income_category:
-			dic[i]=0
 
-		for i in dh:
-			if i.category in income_category:
-				dic[i.category]=dic[i.category]+i.amount
-		
-
-		sz=sorted(dic.items(), key=lambda x: x[1], reverse=True)
-		
-		lable=[la[0] for la in sz]
-		data=[la[1] for la in sz]
-		color=[color_code[la[0]] for la in sz]
-		# print(lable,data)
-
-
-		return({
-				'labels':lable,
-				'data':data,
-				'color':color,
-		})
-
-	def get_dalyTransaction_graph_data(type='month',art=datetime.now().month):
-		dh=transaction.objects.filter(dateTime__month=art-1)
-		dic={}
-		
-		bal_f=dh.first()
+		"""
+		x=[c for c in dh.filter(dateTime__day=1)]
+		x=x[0]
+		print(x.balance+(x.amount if x.type =="DEBIT" else -1*x.amount))
+		"""
+		bal_f=dh.last()
 		bal_a=bal_f.amount if bal_f.type =="DEBIT" else -1*bal_f.amount
 		bal=bal_f.balance+bal_a
+		#print(bal)
 
 		for transiaction in dh:
 			com=str(transiaction.dateTime.date().day)

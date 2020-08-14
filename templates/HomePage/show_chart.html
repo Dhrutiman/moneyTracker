@@ -1,4 +1,4 @@
-{% extends 'bankApp/index.html' %}
+{% extends 'HomePage/base.html' %}
 {% block title %}
 	charts
 {% endblock title %}
@@ -88,17 +88,24 @@
         Chart.defaults.global.defaultFontSize = 15;
 		var chart = new Chart(ctx, {
 		    // The type of chart we want to create
-		    type: 'horizontalBar',
+		    type: 'bar',
 
 		    // The data for our dataset
 		    data: {
-		        labels: {{ chartData.income.labels|safe }},
+		        labels: {{ chartData.income.data1.labels|safe }},
 		        datasets: [{
-		            label: 'Income stack',
-		            backgroundColor: {{ chartData.income.color|safe }},
-		            borderColor: "#000",
-		            data: {{chartData.income.data|safe }},
-		        }]
+			            label: 'Income stack1',
+			            backgroundColor: "rgb(255, 99, 132)",
+			            borderColor: "#000",
+			            data: {{chartData.income.data1.data|safe }},
+		        	},
+			        {
+			            label: 'Income stack2',
+			            backgroundColor: "#FFF",
+			            borderColor: "#000",
+			            data: {{chartData.income.data2.data|safe }},
+			        },
+		        ]
 		    },
 
 		    // Configuration options go here
@@ -122,12 +129,12 @@
 		                fontStyle:'normal',
 		            }
 		        },
+		        barValueSpacing: 20,
 		        scales: {
-		            xAxes: [{
-		                stacked: true
-		            }],
 		            yAxes: [{
-		                stacked: true
+		                ticks: {
+		                    min: 0,
+		                }
 		            }]
 		        },
 	            responsive: true,
@@ -149,7 +156,7 @@
 		        datasets: [{
 		            label: 'Daly Transiaction',
 		            //backgroundColor: '#F00',
-		            borderColor: "#F00",
+		            borderColor: "rgb(255, 99, 132)",
 		            data: {{chartData.dalyTransaction.data|safe }},
 		        	},
 		        	{
@@ -174,10 +181,10 @@
 		        legend: {
 		            display: true,
 		            position: 'top',
-		            Align:'end',
+		            Align:'center',
 		            labels: {
 		                fontColor: '#E0E0E0',
-		                boxWidth: 0,
+		                boxWidth: 3,
 		                fontSize: 15,
 		                fontStyle:'normal',
 		            }

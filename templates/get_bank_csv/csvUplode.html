@@ -1,4 +1,4 @@
-{% extends 'bankApp/index.html' %}
+{% extends 'get_bank_csv/home.html' %}
 {% block title %}
     Uplode CSV
 {% endblock title %}
@@ -6,11 +6,11 @@
     {% if messages %}
         {% for message in messages %}
             <div>
-<!--                | means OR operator-->
+    <!--                | means OR operator-->
                 <center>
-                    <h2>
+                    
                         <strong>{{message|safe}}</strong>
-                    </h2>
+                    
                 </center>
             </div>
         {% endfor %}
@@ -40,10 +40,4 @@
 
     {% endif %}
 
-    {% for statement in statements %}
-        <p>
-            {% include "bankApp/addCategory.html" %}
-
-        </p>
-    {% endfor %}
 {% endblock %}

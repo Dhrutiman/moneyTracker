@@ -15,12 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from get_bank_csv.views import chartViews
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('get_csv/', include('get_bank_csv.urls', namespace='get_bank_csv')),
-    path('', chartViews.as_view(), name='home'),
-
+    path('',include('HomePage.urls', namespace='HomePage'))
 ]

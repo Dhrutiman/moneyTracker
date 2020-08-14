@@ -41,6 +41,9 @@ class transaction(models.Model):
 
 	category_choices.sort(key=sortFunc)
 
+	class Meta:
+		ordering = ('-id', )
+
 	id=models.CharField(primary_key=True,max_length=30)
 	dateTime=models.DateTimeField()
 	amount=models.FloatField()
@@ -52,11 +55,15 @@ class transaction(models.Model):
 	sbject=models.CharField(max_length=100,null=True,blank=True)
 	modified_date = models.DateTimeField(auto_now=True)
 
+	
+
+
 	def __str__(self):
 		return str(self.amount)+" | "+self.description[:15]+" | "+self.type+ " | "+ self.id
 
 	def get_absolute_url(self):
-		return(reverse('get_bank_csv:csvHome'))
+		return(reverse('get_bank_csv:home'))
+
 
 
 

@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-	Home
+	charts
 {% endblock title %}
 
 {% block nav%}
@@ -24,18 +24,8 @@
                 <form class="form-inline my-2 my-lg-0">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:uplode_csv' %}">
-                                <i class="fas fa-upload"></i> Uplode CSV
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:withoutCategoryList' %}">
-                                <i class="fas fa-home" aria-hidden="true"></i> Add Category
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:home' %}">
-                                <i class="fas fa-home" aria-hidden="true"></i> HOME
+                                <i class="fas fa-upload"></i> Add Transiction
                             </a>
                         </li>
                     </ul>
@@ -45,25 +35,3 @@
     </nav>
 {% endblock nav%}
 
-
-{% block content %}
-	<center>
-		<h2>
-			<strong>
-		 		Transiactions
-		 	</strong>
-		</h2>
-	</center>
-	<hr/>
-
-	<div class="list-group">
-		{% for statement in statements %}
-			<a href="{% url 'get_bank_csv:transiaction_edite' statement.pk %}" 
-			class="list-group-item list-group-item-action 
-			{% if statement.category != 'None' %}list-group-item-success
-			{% else %}list-group-item-dark{% endif %}">
-				{{statement}}
-			</a>
-    	{% endfor %}
-	</div>
-{% endblock %}

@@ -75,12 +75,13 @@ hr{
 }
 
 div.canvas-display {
-    border: 5px double #E0E0E0;
-    /*border-radius: 1rem;*/
+    /*border: 5px double #E0E0E0;
+    border-radius: 1rem;*/
 }
 .canvas-display.pie{
     
     height: 423px !important;
+    overflow: hidden;
 }
 .canvas-display.tar{
     height: 148px !important;
@@ -93,6 +94,9 @@ canvas#Chart1{
 
 ul.category-list{
     list-style-type: none;
+}
+ul.category-list li{
+    font-size: 0.8rem;
 }
 
 

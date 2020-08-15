@@ -88,12 +88,12 @@
 						{% for i in chartData.transiaction %}
 						<div style="width: 80%; margin-bottom: 0.5rem;border-radius:5%; margin-left: 10%;margin-right: 10%">
 							{% if i.type == 'DEBIT' %}
-								<div style="background-color: red;font-size: 1.2rem;width: 100%;padding-left: 1.5rem;padding-right: 1.5rem;">
-									-{{i.amount}} <div style="float: right;">{{i.dateTime| date:'d M Y H:i'}}</div>
+								<div style="background-color: red;font-size: 1.2rem;width: 100%;padding-left: 0.8rem;padding-right: 0.8rem;">
+									-{{i.amount}} <div style="float: right;">{{i.dateTime| date:'d/m H:i'}}</div>
 								</div>
 							{% else %}
-								<div style="background-color: green;font-size: 1.2rem;width: 100%;padding-left: 1.5rem;padding-right: 1.5rem;">
-									+{{i.amount}} <div style="float: right;">{{i.dateTime| date:'d M Y H:i'}}</div>
+								<div style="background-color: green;font-size: 1.2rem;width: 100%;padding-left: 0.8rem;padding-right: 0.8rem;">
+									+{{i.amount}} <div style="float: right;">{{i.dateTime| date:'d/m H:i'}}</div>
 								</div>
 							{% endif %}
 						</div>
@@ -125,7 +125,7 @@
 		color={{ chartData.expense.color|safe }}
 		var text=""
 		for(var i=0;i<len;i++){
-			text=text+"<li><div class=\"row\"><div class=\"align-self-center\" id=\"demobox\" style=\"background-color:"+color[i]+"\"></div> "+label[i]+" "+value[i]+"%</div></li>"
+			text=text+"<li><div class=\"row\"><div class=\"align-self-center\" id=\"demobox\" style=\"background-color:"+color[i]+"\"></div>: "+label[i]+" "+value[i]+"%</div></li>"
 		}
 		console.log(text);
 		document.getElementById("expenseCategoryList").innerHTML = text;
@@ -186,7 +186,7 @@
     <script>
         var ctx = document.getElementById('Chart2').getContext('2d');
         Chart.defaults.global.defaultFontColor = '#E0E0E0';
-        Chart.defaults.global.defaultFontSize = 15;
+        Chart.defaults.global.defaultFontSize = 10;
 		var chart = new Chart(ctx, {
 		    // The type of chart we want to create
 		    type: 'bar',
@@ -253,7 +253,7 @@
     <script>
         var ctx = document.getElementById('Chart3').getContext('2d');
         Chart.defaults.global.defaultFontColor = '#E0E0E0';
-        Chart.defaults.global.defaultFontSize = 15;
+        Chart.defaults.global.defaultFontSize = 10;
 		var chart = new Chart(ctx, {
 		    // The type of chart we want to create
 		    type: 'line',

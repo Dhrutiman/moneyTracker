@@ -59,7 +59,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'moneyApp.urls'
 
+LOGIN_URL = 'login' 
+
+LOGOUT_URL = 'logout'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL='HomePage:home'
 
 TEMPLATES = [
     {

@@ -88,13 +88,14 @@ class graph_data:
 		"""	
 				
 		for i in dh.filter(type='DEBIT'):
-			com=i.category
-			amo=i.amount
+			if i.category in expense_category:
+				com=i.category
+				amo=i.amount
 
-			if com in dic:
-					dic[com]=dic[com]+amo
-			else:
-				dic[com]=amo
+				if com in dic:
+						dic[com]=dic[com]+amo
+				else:
+					dic[com]=amo
 		
 
 		sz=sorted(dic.items(), key=lambda x: x[1], reverse=True)

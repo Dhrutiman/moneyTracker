@@ -11,7 +11,7 @@ from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import UpdateView
 
 # Create your views here.
-@permission_required('admin.can_add_log_entry')
+@permission_required('admin.can_add_log_entry',login_url="login")
 def uplode_csv(request):
 	template="get_bank_csv/csvUplode.html"
 
@@ -74,7 +74,8 @@ def uplode_csv(request):
 
 class bank_statement_without_category_page(ListView):
 	#model = transaction
-	queryset = transaction.objects.filter(category='None')
+	no_month=datetime.now().month - 3 ## last one month only
+	queryset = transaction.objects.filter(category='None',dateTime__month__gte=no_month)
 	template_name='get_bank_csv/statement.html'
 	context_object_name="statements"
 
@@ -90,5 +91,5 @@ class bank_statement_update_page(PermissionRequiredMixin,UpdateView):
 	template_name="get_bank_csv/statement_edit.html"
 	fields = ['category','sbject']
 	permission_required = ('admin.can_add_log_entry',)
-	login_url = '/admin'
+	login_url = 'login'
 

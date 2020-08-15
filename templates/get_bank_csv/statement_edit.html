@@ -6,9 +6,9 @@
 {% endblock title %}
 {% block content %}
 	<center>
-		<h1>
-			Add Category For Payment
-		</h1>
+		<h2>
+			{{transaction}}
+		</h2>
 	</center>
 	<hr/>
 
@@ -20,9 +20,9 @@
 		<div class="row">
 			<div class="col disc"><strong>Description</strong>:- {{transaction.description}}</div>
 		</div>
-		<div class="row">
-			
-  			<div class="col col-lg-4 offset-lg-8 aline-end"><strong>Last edited</strong> {{transaction.modified_date|date:'d M Y H:i'}}</div>
+		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-2">
+			<div class="col col-lg-8"><strong>Check No.</strong>:- {{transaction.check_no}}</div>
+  			<div class="col col-lg-4  aline-end"><strong>Last edited</strong> {{transaction.modified_date|date:'d M Y H:i'}}</div>
 		</div>
 	</div>
 	<hr/>

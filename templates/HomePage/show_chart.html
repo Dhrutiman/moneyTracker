@@ -37,7 +37,7 @@
 			  <input type="number" 
 			  class="form-style form-control" id="inlineFormInputName2" 
 			  style="width: 6rem;" 
-			  placeholder="year" name="year" >
+			 	name="year" >
 
 			  <button type="submit" class="form-style btn btn-success">
 			  	<i class="fas fa-external-link-alt" style="font-size: 1rem"></i>
@@ -118,6 +118,45 @@
 {% endblock content %}
 
 {% block script %}
+	{% if not chartData.errorMessages  %}
+	<script type="text/javascript">
+			var _month=document.getElementById("inlineFormCustomSelectPref");
+			var _year=document.getElementById("inlineFormInputName2");
+			var link=window.location.href.split("/").pop()
+			if (!(link.indexOf('?') > -1)){
+				var d = new Date();
+				var month = d.getMonth();
+				var year= d.getFullYear();
+				_month.value=month
+				_year.value=year
+				//console.log(month,year);
+			}
+			else{
+				link=link.split("?").pop().split("&");
+				console.log(link);
+
+				var month=link[0].split("=").pop();
+				var year=link[1].split("=").pop();
+				//console.log(month,year);
+				
+				if (month.length == 0){
+					var d = new Date();
+					var n = d.getMonth();
+					month=n
+				}
+				if (year.length==0){
+					var d = new Date();
+					var n = d.getFullYear();
+					year=n
+				}
+				_month.value=month
+				_year.value=year
+				
+				//console.log(month,year);
+			}
+			
+			
+	</script>
 	<script type="text/javascript">
 		var len= {{ chartData.expense.labels|safe }}.length
 		label={{ chartData.expense.labels|safe }}
@@ -127,7 +166,7 @@
 		for(var i=0;i<len;i++){
 			text=text+"<li><div class=\"row\"><div class=\"align-self-center\" id=\"demobox\" style=\"background-color:"+color[i]+"\"></div>: "+label[i]+" "+value[i]+"%</div></li>"
 		}
-		console.log(text);
+		//console.log(text);
 		document.getElementById("expenseCategoryList").innerHTML = text;
 		
 	</script>
@@ -309,4 +348,5 @@
 			}
 		});
     </script>
+    {% endif %}
 {% endblock script %}

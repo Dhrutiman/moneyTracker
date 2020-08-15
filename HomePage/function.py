@@ -88,7 +88,7 @@ class graph_data:
 		"""	
 				
 		for i in dh.filter(type='DEBIT'):
-			if i.category in expense_category:
+			if i.category in expense_category or i.category=='None':
 				com=i.category
 				amo=i.amount
 
@@ -117,9 +117,14 @@ class graph_data:
 		})
 
 	def get_incom_graph_data(self):
-		
+
 		def get_done(mont):
-			dh=transaction.objects.filter(dateTime__year=self.year,dateTime__month=mont)
+			_year=self.year
+			_mont=mont
+			if mont==0:
+				_mont=12
+				_year=_year-1
+			dh=transaction.objects.filter(dateTime__year=_year,dateTime__month=_mont)
 			dic={}
 			dic['Income']=0
 			dic['Expenses']=0

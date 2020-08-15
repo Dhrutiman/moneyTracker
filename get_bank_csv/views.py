@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect,reverse
 from django.http import HttpResponse
 import csv,io
-from django.contrib import messages
+from django.contrib import messages as ad_messages
 from django.contrib.auth.decorators import permission_required
 from .models import data,transaction
 from datetime import datetime
+
+from django.contrib.messages.views import messages as mess
 
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from django.views.generic import ListView, TemplateView
@@ -15,7 +17,7 @@ from django.views.generic.edit import UpdateView
 def uplode_csv(request):
 	template="get_bank_csv/csvUplode.html"
 
-	messages=[]
+	#messages=[]
 
 	prompt={
 		'order':"Uplode CSV file of bank statement"
@@ -27,7 +29,7 @@ def uplode_csv(request):
 	csv_file=request.FILES['file']	
 
 	if not (csv_file.name.endswith('csv') or csv_file.name.endswith('CSV')):
-		messages.error(request, 'THIS IS NOT A CSV FILE')
+		ad_messages.error(request, 'THIS IS NOT A CSV FILE')
 		return render(request, template)
 	
 	data_set = csv_file.read().decode('UTF-8')
@@ -81,9 +83,26 @@ class bank_statement_without_category_page(ListView):
 
 class bank_statement_page(ListView):
 	#model = transaction
-	queryset = transaction.objects.all()
+	queryset = transaction.objects.all()[:100]
 	template_name='get_bank_csv/home.html'
 	context_object_name="statements"
+
+class bank_allStatement_page(ListView):
+	#model = transaction
+	template_name='get_bank_csv/allTransiaction.html'
+	context_object_name="statements"
+	def get_queryset(self):
+		try:
+			_month = self.request.GET['month']
+		except :
+			_month=datetime.now().month
+		querySet=transaction.objects.filter(dateTime__month=_month)
+		if len(querySet)==0:
+			ad_messages.error(self.request, 'Queryset is empty')
+		return  querySet
+
+
+	
 
 class bank_statement_update_page(PermissionRequiredMixin,UpdateView):
 	model= transaction

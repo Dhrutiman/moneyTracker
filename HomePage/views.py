@@ -51,7 +51,7 @@ class chartViews(TemplateView):
 					'expense':charData.get_expenses_graph_data(),
 					'income':charData.get_incom_graph_data(),
 					'dalyTransaction':charData.get_dalyTransaction_graph_data(),
-					'month':[dt.date(_year, _month, 1).strftime('%B'),dt.date(_year, _month-1, 1).strftime('%B')],
+					'month':[dt.date(_year, _month, 1).strftime('%B'),dt.date(_year, _month if _month-1>0 else 12, 1).strftime('%B')],
 					'transiaction':charData.dataSet,
 					'messages':messages,
 				}
@@ -65,7 +65,7 @@ class chartViews(TemplateView):
 			}
 
 		context = super().get_context_data(**kwargs,)
-		charData=graph_data(type='month',month=_month,year=_year)
+		#charData=graph_data(type='month',month=_month,year=_year)
 		# print(outChartData)
 		context['chartData'] = outChartData
 		return context

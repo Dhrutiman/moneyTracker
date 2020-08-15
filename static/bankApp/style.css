@@ -74,29 +74,38 @@ hr{
 
 }
 
-canvas{
-    border:5px double #E0E0E0;
-    border-radius: 1rem;
+div.canvas-display {
+    border: 5px double #E0E0E0;
+    /*border-radius: 1rem;*/
+}
+.canvas-display.pie{
+    
+    height: 423px !important;
+}
+.canvas-display.tar{
+    height: 148px !important;
 }
 
 canvas#Chart1{
-
-  width:100% !important;
-  height:80vh !important;
-
+    box-sizing: inherit;
+    width: 100% !important;
 }
 
-canvas#Chart2{
+ul.category-list{
+    list-style-type: none;
+}
 
-  width:100% !important;
-  height:30vh !important;
+
+canvas#Chart2{
+    box-sizing: inherit;
+    width:100% !important;
+    height:250px !important;
 
 }
 canvas#Chart3{
-
-  width:100% !important;
-  height:50vh !important;
-
+    box-sizing: inherit;
+    width:100% !important;
+    height:300px !important;
 }
 .error{
     font-size: 1rem;
@@ -111,3 +120,15 @@ canvas#Chart3{
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
 }
+#demobox {
+  background-color: #cfc ;
+  height: 0.6rem ;
+  width: .6rem;
+  padding: 0.2rem;
+  border: 0 solid green ;
+}
+
+.canvas-display.tar .scrol-text{
+
+}
+

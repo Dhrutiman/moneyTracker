@@ -2,6 +2,7 @@ from datetime import datetime
 from get_bank_csv.models import transaction
 
 
+
 ##category=['BusinessIncome', 'Call&Internet', 'Clothing', 'Coupons', 'Donation', 'EarnedIncome', 'Education', 'Entertanment', 'Food', 'Grocery', 'Health&Medicine', 'Help', 'Investment', 'InvestmentIncome', 'Loan', 'MonthlyRent', 'None', 'Others', 'Salary', 'Shopping', 'SoldIteams', 'Transport', 'UtilityBills', 'Wage']
 color_code={
 			'BusinessIncome': '#FF7F50', 
@@ -32,6 +33,35 @@ color_code={
 income_category=['BusinessIncome', 'Coupons', 'EarnedIncome', 'Investment', 'InvestmentIncome', 'Loan', 'Salary', 'SoldIteams','Wage']
 expense_category=['Transport', 'Food', 'Donation', 'Grocery', 'MonthlyRent', 'Shopping', 'UtilityBills', 'Call&Internet', 'Entertanment', 'Clothing', 'Help', 'Investment', 'Education', 'Health&Medicine','Others']
 
+base={
+		'Transport': 'Transport', 
+		'Food': 'food', 
+		'Donation': 'donation', 
+		'Grocery': 'Grocery', 
+		'MonthlyRent': 'rent', 
+		'Shopping': 'Shopping', 
+		'UtilityBills': 'Bills', 
+		'Call&Internet': 'Call', 
+		'Entertanment': 'Fun', 
+		'Clothing': 'Cloth', 
+		'Help': 'Help', 
+		'Investment': 'Invested', 
+		'Education': 'Education', 
+		'Health&Medicine': 'Health', 
+		'CashWithdraw': 'CASH', 
+		'RefundORCancle': 'Refund', 
+		'Loan': 'Loan', 
+		'EarnedIncome': 'E-Incom', 
+		'BusinessIncome': 'B-Incom', 
+		'InvestmentIncome': 'I-Incom', 
+		'SoldIteams': 'SOld', 
+		'Coupons': 'Coupons', 
+		'Salary': 'Salary', 
+		'Wage': 'Wage', 
+		'Others': 'Others', 
+		'None': 'NONE'
+	}
+
 
 class graph_data:
 
@@ -55,7 +85,8 @@ class graph_data:
 		for i in dh:
 			if i.category in expense_category:
 				dic[i.category]=dic[i.category]+i.amount
-				"""
+		"""	
+				
 		for i in dh.filter(type='DEBIT'):
 			com=i.category
 			amo=i.amount
@@ -67,10 +98,13 @@ class graph_data:
 		
 
 		sz=sorted(dic.items(), key=lambda x: x[1], reverse=True)
-		
-		lable=[la[0] for la in sz]
+		global base
+
+		lable=[base[la[0]] for la in sz]
 		data=[la[1] for la in sz]
 		color=[color_code[la[0]] for la in sz]
+		amount_total=sum(data)
+		persent=[float("{:.1f}".format(x/amount_total*100)) for x in data]
 		# print(lable,data)
 
 
@@ -78,6 +112,7 @@ class graph_data:
 				'labels':lable,
 				'data':data,
 				'color':color,
+				'percent':persent,
 		})
 
 	def get_incom_graph_data(self):

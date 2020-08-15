@@ -5,17 +5,17 @@
 
 {% block content %}
 
-	<div class="row">
-		<div class="col col-lg-4 col-md-4 col-1">
+	<div class="row row-cols-lg-3 row-cols-md-3 row-cols-1">
+		<div class="col">
 		</div>
-		<div class="col col-lg-4 col-md-4 col-1 justify-content-center align-self-center">
+		<div class="col justify-content-center align-self-center">
 			<center>
 				<h2>
 					{{chartData.month.0}}
 				</h2>
 			</center>
 		</div>
-		<div class="month-form col col-lg-4 col-md-4 col-1">
+		<div class="month-form col">
 			<form class="form-inline align-self-center justify-content-end">
 			  <!--<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Month</label>-->
 			  <select class="form-style custom-select" id="inlineFormCustomSelectPref" name="month">
@@ -67,15 +67,45 @@
 			<hr/>
 		{% endif %}
 
-		<div class="row row-cols-1 row-cols-md-1 row-cols-lg-2">
+		<div class=" row row-cols-1 row-cols-md-1 row-cols-lg-2">
 			<div class="col col-lg-6">
-				<canvas id="Chart1" >
+				<div class=" canvas-display pie row row-cols-1">
+					<div class="row row-cols-1" >
+						<center><h4 style="color: #e0e0e0">Expensess of {{chartData.month.0}}</h4></center>
+					</div>
+					<div class="row">
+						<div class="col col-8">
+							<canvas id="Chart1" />
+						</div>
+						<div class="col col-4 align-self-center">
+							<ul class="category-list" id="expenseCategoryList">
+							</ul>								
+						</div>
+					</div>
+				</div>
+				<div class="canvas-display tar row row-cols-1">
+					<marquee behavior="scroll" direction="up" scrollamount="5" class="scrol-text" style="height:100%;">
+						{% for i in chartData.transiaction %}
+						<div style="width: 80%; margin-bottom: 0.5rem;border-radius:5%; margin-left: 10%;margin-right: 10%">
+							{% if i.type == 'DEBIT' %}
+								<div style="background-color: red;font-size: 1.2rem;width: 100%;padding-left: 1.5rem;padding-right: 1.5rem;">
+									-{{i.amount}} <div style="float: right;">{{i.dateTime| date:'d M Y H:i'}}</div>
+								</div>
+							{% else %}
+								<div style="background-color: green;font-size: 1.2rem;width: 100%;padding-left: 1.5rem;padding-right: 1.5rem;">
+									+{{i.amount}} <div style="float: right;">{{i.dateTime| date:'d M Y H:i'}}</div>
+								</div>
+							{% endif %}
+						</div>
+						{% endfor %}
+					</marquee>
+				</div>
 			</div>
 			<div class="col col-lg-6">
-				<div class="row">
+				<div class="canvas-display row">
 					<canvas id="Chart2" >
 				</div>
-				<div class="row">
+				<div class="canvas-display row">
 					<canvas id="Chart3" >
 				</div>
 			</div>
@@ -88,6 +118,19 @@
 {% endblock content %}
 
 {% block script %}
+	<script type="text/javascript">
+		var len= {{ chartData.expense.labels|safe }}.length
+		label={{ chartData.expense.labels|safe }}
+		value={{chartData.expense.percent|safe }}
+		color={{ chartData.expense.color|safe }}
+		var text=""
+		for(var i=0;i<len;i++){
+			text=text+"<li><div class=\"row\"><div class=\"align-self-center\" id=\"demobox\" style=\"background-color:"+color[i]+"\"></div> "+label[i]+" "+value[i]+"%</div></li>"
+		}
+		console.log(text);
+		document.getElementById("expenseCategoryList").innerHTML = text;
+		
+	</script>
     <script>
         var ctx = document.getElementById('Chart1').getContext('2d');
 		var chart = new Chart(ctx, {
@@ -101,7 +144,7 @@
 		            label: 'Expensess of Aug',
 		            backgroundColor: {{ chartData.expense.color|safe }},
 		            borderColor: "#3B4F54",
-		            borderWidth: 4,
+		            borderWidth: 2,
 		            data: {{chartData.expense.data|safe }},
 		        }]
 		    },
@@ -110,14 +153,14 @@
 		    options: {
 		    	layout: {
 		            padding: {
-		                left: 10,
+		                left: 5,
 		                right: 0,
-		                top: 20,
-		                bottom: 20,
+		                top: 10,
+		                bottom: 10,
 		          	}
 		        },
 		        legend: {
-		            display: true,
+		            display: false,
 		            position: 'bottom',
 		            Align:'end',
 		            labels: {
@@ -127,8 +170,8 @@
 		            }
 		        },
 		        title: {
-		            display: true,
-		            text: 'Expensess of Aug',
+		            display: false,
+		            text: 'Expensess of {{chartData.month.0}}',
 		            fontSize:30,
 		            fontColor: '#E0E0E0',
 		            fontStyle:'normal',
@@ -152,16 +195,16 @@
 		    data: {
 		        labels: {{ chartData.income.data1.labels|safe }},
 		        datasets: [{
-			            label: '{{chartData.month.0}}',
+			            label: '{{chartData.month.1}}',
 			            backgroundColor: "rgb(255, 99, 132)",
 			            borderColor: "#000",
-			            data: {{chartData.income.data1.data|safe }},
+			            data: {{chartData.income.data2.data|safe }},
 		        	},
 			        {
-			            label: '{{chartData.month.1}}',
+			            label: '{{chartData.month.0}}',
 			            backgroundColor: "#FFF",
 			            borderColor: "#000",
-			            data: {{chartData.income.data2.data|safe }},
+			            data: {{chartData.income.data1.data|safe }},
 			        },
 		        ]
 		    },
@@ -178,16 +221,23 @@
 		        },
 		        legend: {
 		            display: true,
-		            position: 'top',
+		            position: 'bottom',
 		            Align:'end',
 		            labels: {
 		                fontColor: '#E0E0E0',
-		                boxWidth: 0,
-		                fontSize: 20,
+		                boxWidth: 20,
+		                fontSize: 15,
 		                fontStyle:'normal',
 		            }
 		        },
-		        barValueSpacing: 20,
+		        title: {
+		            display: true,
+		            text: 'Comparisation of {{chartData.month.0}} and {{chartData.month.1}}',
+		            fontSize:20,
+		            fontColor: '#E0E0E0',
+		            fontStyle:'normal',
+		        },
+		        barValueSpacing: 10,
 		        scales: {
 		            yAxes: [{
 		                ticks: {
@@ -232,13 +282,13 @@
 		            padding: {
 		                left: 5,
 		                right: 5,
-		                top: 10,
-		                bottom: 0,
+		                top: 5,
+		                bottom: 5,
 		          	}
 		        },
 		        legend: {
 		            display: true,
-		            position: 'top',
+		            position: 'bottom',
 		            Align:'center',
 		            labels: {
 		                fontColor: '#E0E0E0',
@@ -247,7 +297,13 @@
 		                fontStyle:'normal',
 		            }
 		        },
-
+		        title: {
+		            display: true,
+		            text: 'Daily Transaction Summary ',
+		            fontSize:20,
+		            fontColor: '#E0E0E0',
+		            fontStyle:'normal',
+		        },
 	            responsive: true,
 			    maintainAspectRatio: false,
 			}

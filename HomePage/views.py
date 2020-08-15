@@ -52,12 +52,13 @@ class chartViews(TemplateView):
 					'income':charData.get_incom_graph_data(),
 					'dalyTransaction':charData.get_dalyTransaction_graph_data(),
 					'month':[dt.date(_year, _month, 1).strftime('%B'),dt.date(_year, _month-1, 1).strftime('%B')],
+					'transiaction':charData.dataSet,
 					'messages':messages,
 				}
 		
 		
 		except Exception as e:
-			# print('cant')
+			print(e)
 			messages.append("can't get data for "+dt.date(_year, _month, 1).strftime("%b, %Y"),)
 			outChartData={
 				'errorMessages':messages,

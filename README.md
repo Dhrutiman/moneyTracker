@@ -18,8 +18,7 @@ You're sections headers will be used to reference location of destination.
 ---
 
 ## Description
-moneyTracker is a money tracking web app. Here anyone can upload his/her’s bank transaction statement as a CSV file. 
-
+moneyTracker is a money tracking web app. Which provide us with our monthly expenses, daily transactions, and other information in a gook looking graph and charts. For that, we have to upload our bank transaction statement as a CSV file and add category and subject to each entered transactions to show in our homepage.
 
 #### Technologies
 
@@ -41,15 +40,15 @@ moneyTracker is a money tracking web app. Here anyone can upload his/her’s ban
 
 #### API Reference
 
-```html
-    <p>dummy code</p>
+```console
+foo@bar:~$ whoami
 ```
-[Back To The Top](#MoneyTracker )
+[Back To The Top](#Money-Tracker )
 
 ---
 
 ## References
-[Back To The Top](#MoneyTracker )
+[Back To The Top](#Money-Tracker )
 
 ---
 
@@ -77,7 +76,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-[Back To The Top](#MoneyTracker )
+[Back To The Top](#Money-Tracker )
 
 ---
 
@@ -86,4 +85,4 @@ SOFTWARE.
 - Twitter - 
 - Website - 
 
-[Back To The Top](#MoneyTracker )
+[Back To The Top](#Money-Tracker )

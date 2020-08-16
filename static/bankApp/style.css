@@ -32,7 +32,7 @@ nav .btn{
     border:0;
 }
 .nav-button .btn{
-    margin-left: 1rem;
+    margin-left: 0.2rem;
 }
 
 .nav-button{
@@ -86,7 +86,13 @@ div.canvas-display {
 .canvas-display.tar{
     height: 148px !important;
 }
-
+.canvas-display.tar div{
+    font-size: 1.2rem;
+    width: 100%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-bottom: 0.5rem;
+}
 canvas#Chart1{
     box-sizing: inherit;
     width: 100% !important;

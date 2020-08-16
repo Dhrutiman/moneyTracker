@@ -24,27 +24,28 @@
                 <form class="form-inline my-2 my-lg-0">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:allTransiaction' %}">
-                                <i class="fas fa-sign-out-alt"></i> Transiction
+                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:home' %}" title="Home" >
+                                <i class="fas fa-home" aria-hidden="true"></i>
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:uplode_csv' %}">
-                                <i class="fas fa-upload"></i> Uplode CSV
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:withoutCategoryList' %}">
-                                <i class="fas fa-home" aria-hidden="true"></i> Add Category
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:home' %}">
-                                <i class="fas fa-home" aria-hidden="true"></i> HOME
+                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:allTransiaction' %}" title="Get all transiction">
+                                Transiction
                             </a>
                         </li>
                         <li class="nav-item active">
-                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'logout' %}" name="logout">
+                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:uplode_csv' %}" title="Uplode bank csv file">
+                                <i class="fas fa-upload"></i> CSV
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'get_bank_csv:withoutCategoryList' %}" title="Add category to recent transactions">
+                                <i class="fas fa-plus" aria-hidden="true"></i> Category
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item active">
+                            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url 'logout' %}" name="logout" title="Logout">
                                 <i class="fas fa-sign-out-alt"></i> 
                             </a>
                         </li>
@@ -61,7 +62,7 @@
 	<center>
 		<h2>
 			<strong>
-		 		Transiactions
+		 		Transactions
 		 	</strong>
 		</h2>
 	</center>

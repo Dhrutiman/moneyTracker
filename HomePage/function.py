@@ -166,12 +166,12 @@ class graph_data:
 		"""
 		x=[c for c in dh.filter(dateTime__day=1)]
 		x=x[0]
-		print(x.balance+(x.amount if x.type =="DEBIT" else -1*x.amount))
+		# print(x.balance+(x.amount if x.type =="DEBIT" else -1*x.amount))
 		"""
 		bal_f=dh.last()
 		bal_a=bal_f.amount if bal_f.type =="DEBIT" else -1*bal_f.amount
 		bal=bal_f.balance+bal_a
-		#print(bal)
+		# print(bal)
 
 		for transiaction in dh:
 			com=str(transiaction.dateTime.date().day)
@@ -184,7 +184,21 @@ class graph_data:
 				dic[com]=dic[com]+amo
 			else:
 				dic[com]=amo
+		# print(dic)
+		
+		lable=[]
+		data=[]
+		data1=[]
+		for i in range(1,32,1):
+			if str(i) in dic:
+				lable.append(str(i))
+				data.append(dic[str(i)])
+				data1.append(bal+dic[str(i)])
+				bal=bal+dic[str(i)]
 
+		# print(lable,data,data1)
+		
+		"""
 		sz=sorted(dic.items(), key=lambda x: x[0], reverse=False)
 		# print(dic.keys())
 		lable=[str(i) for i in range(1,32,1)]
@@ -196,6 +210,7 @@ class graph_data:
 			data1.append(bal+i)
 			bal=bal+i
 		# print(data1)
+		"""
 
 		return({
 				'labels':lable,

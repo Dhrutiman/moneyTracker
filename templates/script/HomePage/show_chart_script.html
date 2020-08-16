@@ -1,0 +1,47 @@
+<script type="text/javascript">
+	var _month=document.getElementById("inlineFormCustomSelectPref");
+	var _year=document.getElementById("inlineFormInputName2");
+	var link=window.location.href.split("/").pop()
+	var d = new Date();
+	if (!(link.indexOf('?') > -1)){
+		var month = d.getMonth();
+		var year= d.getFullYear();
+		_month.value=month
+		_year.value=year
+		//console.log(month,year);
+	}
+	else{
+		link=link.split("?").pop().split("&");
+		//console.log(link);
+
+		var month=link[0].split("=").pop();
+		var year=link[1].split("=").pop();
+		//console.log(month,year);
+		
+		if (month.length == 0){
+			var n = d.getMonth();
+			month=n
+		}
+		if (year.length==0 || year>d.getFullYear()){
+			var n = d.getFullYear();
+			year=n
+		}
+		_month.value=month
+		_year.value=year
+		
+		//console.log(month,year);
+	}
+</script>
+<script type="text/javascript">
+	var len= {{ chartData.expense.labels|safe }}.length
+	label={{ chartData.expense.labels|safe }}
+	value={{chartData.expense.percent|safe }}
+	color={{ chartData.expense.color|safe }}
+	var text=""
+	for(var i=0;i<len;i++){
+		text=text+"<li><div class=\"row\"><div class=\"align-self-center\" id=\"demobox\" style=\"background-color:"+color[i]+"\"></div>: "+label[i]+" "+value[i]+"%</div></li>"
+	}
+	//console.log(text);
+	document.getElementById("expenseCategoryList").innerHTML = text;
+	
+</script>

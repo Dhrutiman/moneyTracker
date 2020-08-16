@@ -83,20 +83,20 @@
 						</div>
 					</div>
 				</div>
-				<div class="canvas-display tar row row-cols-1">
+				<div class="canvas-display tar row row-cols-1" style="padding-left: 5%;">
 					<marquee behavior="scroll" direction="up" scrollamount="5" class="scrol-text" style="height:100%;">
 						{% for i in chartData.transiaction %}
-						<div style="width: 80%; margin-bottom: 0.5rem;border-radius:5%; margin-left: 10%;margin-right: 10%">
 							{% if i.type == 'DEBIT' %}
-								<div style="background-color: red;font-size: 1.2rem;width: 100%;padding-left: 0.8rem;padding-right: 0.8rem;">
-									-{{i.amount}} <div style="float: right;">{{i.dateTime| date:'d/m H:i'}}</div>
+								<div class="row row-cols-2" style="background-color: red;">
+									<div class="col">-{{i.amount}}</div> 
+									<div class="col" style="text-align: right;">{{i.dateTime| date:'d/m H:i'}}</div>
 								</div>
 							{% else %}
-								<div style="background-color: green;font-size: 1.2rem;width: 100%;padding-left: 0.8rem;padding-right: 0.8rem;">
-									+{{i.amount}} <div style="float: right;">{{i.dateTime| date:'d/m H:i'}}</div>
+								<div class="row row-cols-2" style="background-color: green;">
+									<div class="col">+{{i.amount}}</div> 
+									<div class="col" style="text-align: right;" >{{i.dateTime| date:'d/m H:i'}}</div>
 								</div>
 							{% endif %}
-						</div>
 						{% endfor %}
 					</marquee>
 				</div>
@@ -111,242 +111,12 @@
 			</div>
 		</div>
 	{% endif %}
-	
-	
-    
-    <!--<canvas id="myChart" style="background-color: #151515;height: 80vh;"></canvas>-->
 {% endblock content %}
 
-{% block script %}
-	{% if not chartData.errorMessages  %}
-	<script type="text/javascript">
-			var _month=document.getElementById("inlineFormCustomSelectPref");
-			var _year=document.getElementById("inlineFormInputName2");
-			var link=window.location.href.split("/").pop()
-			if (!(link.indexOf('?') > -1)){
-				var d = new Date();
-				var month = d.getMonth();
-				var year= d.getFullYear();
-				_month.value=month
-				_year.value=year
-				//console.log(month,year);
-			}
-			else{
-				link=link.split("?").pop().split("&");
-				console.log(link);
 
-				var month=link[0].split("=").pop();
-				var year=link[1].split("=").pop();
-				//console.log(month,year);
-				
-				if (month.length == 0){
-					var d = new Date();
-					var n = d.getMonth();
-					month=n
-				}
-				if (year.length==0){
-					var d = new Date();
-					var n = d.getFullYear();
-					year=n
-				}
-				_month.value=month
-				_year.value=year
-				
-				//console.log(month,year);
-			}
-			
-			
-	</script>
-	<script type="text/javascript">
-		var len= {{ chartData.expense.labels|safe }}.length
-		label={{ chartData.expense.labels|safe }}
-		value={{chartData.expense.percent|safe }}
-		color={{ chartData.expense.color|safe }}
-		var text=""
-		for(var i=0;i<len;i++){
-			text=text+"<li><div class=\"row\"><div class=\"align-self-center\" id=\"demobox\" style=\"background-color:"+color[i]+"\"></div>: "+label[i]+" "+value[i]+"%</div></li>"
-		}
-		//console.log(text);
-		document.getElementById("expenseCategoryList").innerHTML = text;
-		
-	</script>
-    <script>
-        var ctx = document.getElementById('Chart1').getContext('2d');
-		var chart = new Chart(ctx, {
-		    // The type of chart we want to create
-		    type: 'doughnut',
-
-		    // The data for our dataset
-		    data: {
-		        labels: {{ chartData.expense.labels|safe }},
-		        datasets: [{
-		            label: 'Expensess of Aug',
-		            backgroundColor: {{ chartData.expense.color|safe }},
-		            borderColor: "#3B4F54",
-		            borderWidth: 2,
-		            data: {{chartData.expense.data|safe }},
-		        }]
-		    },
-
-		    // Configuration options go here
-		    options: {
-		    	layout: {
-		            padding: {
-		                left: 5,
-		                right: 0,
-		                top: 10,
-		                bottom: 10,
-		          	}
-		        },
-		        legend: {
-		            display: false,
-		            position: 'bottom',
-		            Align:'end',
-		            labels: {
-		                fontColor: '#E0E0E0',
-		                boxWidth: 20,
-		                fontSize: 15,
-		            }
-		        },
-		        title: {
-		            display: false,
-		            text: 'Expensess of {{chartData.month.0}}',
-		            fontSize:30,
-		            fontColor: '#E0E0E0',
-		            fontStyle:'normal',
-		        },
-	            responsive: true,
-			    maintainAspectRatio: false,
-			}
-
-			
-		});
-    </script>
-    <script>
-        var ctx = document.getElementById('Chart2').getContext('2d');
-        Chart.defaults.global.defaultFontColor = '#E0E0E0';
-        Chart.defaults.global.defaultFontSize = 10;
-		var chart = new Chart(ctx, {
-		    // The type of chart we want to create
-		    type: 'bar',
-
-		    // The data for our dataset
-		    data: {
-		        labels: {{ chartData.income.data1.labels|safe }},
-		        datasets: [{
-			            label: '{{chartData.month.1}}',
-			            backgroundColor: "rgb(255, 99, 132)",
-			            borderColor: "#000",
-			            data: {{chartData.income.data2.data|safe }},
-		        	},
-			        {
-			            label: '{{chartData.month.0}}',
-			            backgroundColor: "#FFF",
-			            borderColor: "#000",
-			            data: {{chartData.income.data1.data|safe }},
-			        },
-		        ]
-		    },
-
-		    // Configuration options go here
-		    options: {
-		    	layout: {
-		            padding: {
-		                left: 5,
-		                right: 5,
-		                top: 10,
-		                bottom: 0,
-		          	}
-		        },
-		        legend: {
-		            display: true,
-		            position: 'bottom',
-		            Align:'end',
-		            labels: {
-		                fontColor: '#E0E0E0',
-		                boxWidth: 20,
-		                fontSize: 15,
-		                fontStyle:'normal',
-		            }
-		        },
-		        title: {
-		            display: true,
-		            text: 'Comparisation of {{chartData.month.0}} and {{chartData.month.1}}',
-		            fontSize:20,
-		            fontColor: '#E0E0E0',
-		            fontStyle:'normal',
-		        },
-		        barValueSpacing: 10,
-		        scales: {
-		            yAxes: [{
-		                ticks: {
-		                    min: 0,
-		                }
-		            }]
-		        },
-	            responsive: true,
-			    maintainAspectRatio: false,
-			}
-		});
-    </script>
-    <script>
-        var ctx = document.getElementById('Chart3').getContext('2d');
-        Chart.defaults.global.defaultFontColor = '#E0E0E0';
-        Chart.defaults.global.defaultFontSize = 10;
-		var chart = new Chart(ctx, {
-		    // The type of chart we want to create
-		    type: 'line',
-
-		    // The data for our dataset
-		    data: {
-		        labels: {{ chartData.dalyTransaction.labels|safe }},
-		        datasets: [{
-		            label: 'Daly Transiaction',
-		            //backgroundColor: '#F00',
-		            borderColor: "rgb(255, 99, 132)",
-		            data: {{chartData.dalyTransaction.data|safe }},
-		        	},
-		        	{
-		            label: 'Balance',
-		            //backgroundColor: '#F00',
-		            borderColor: "#FFF",
-		            data: {{chartData.dalyTransaction.data1|safe }},
-		        	},
-		        ]
-		    },
-
-		    // Configuration options go here
-		    options: {
-		    	layout: {
-		            padding: {
-		                left: 5,
-		                right: 5,
-		                top: 5,
-		                bottom: 5,
-		          	}
-		        },
-		        legend: {
-		            display: true,
-		            position: 'bottom',
-		            Align:'center',
-		            labels: {
-		                fontColor: '#E0E0E0',
-		                boxWidth: 3,
-		                fontSize: 15,
-		                fontStyle:'normal',
-		            }
-		        },
-		        title: {
-		            display: true,
-		            text: 'Daily Transaction Summary ',
-		            fontSize:20,
-		            fontColor: '#E0E0E0',
-		            fontStyle:'normal',
-		        },
-	            responsive: true,
-			    maintainAspectRatio: false,
-			}
-		});
-    </script>
-    {% endif %}
-{% endblock script %}
+{% if not chartData.errorMessages  %}
+	{% block script %}
+		{% include 'script/HomePage/show_chart_script.html' %}
+		{% include 'script/HomePage/chart.html' %}
+	{% endblock script %}
+{% endif %}

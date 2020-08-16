@@ -1,0 +1,179 @@
+    
+<script>
+        var ctx = document.getElementById('Chart1').getContext('2d');
+		var chart = new Chart(ctx, {
+		    // The type of chart we want to create
+		    type: 'doughnut',
+
+		    // The data for our dataset
+		    data: {
+		        labels: {{ chartData.expense.labels|safe }},
+		        datasets: [{
+		            label: 'Expensess of Aug',
+		            backgroundColor: {{ chartData.expense.color|safe }},
+		            borderColor: "#3B4F54",
+		            borderWidth: 2,
+		            data: {{chartData.expense.data|safe }},
+		        }]
+		    },
+
+		    // Configuration options go here
+		    options: {
+		    	layout: {
+		            padding: {
+		                left: 5,
+		                right: 0,
+		                top: 10,
+		                bottom: 10,
+		          	}
+		        },
+		        legend: {
+		            display: false,
+		            position: 'bottom',
+		            Align:'end',
+		            labels: {
+		                fontColor: '#E0E0E0',
+		                boxWidth: 20,
+		                fontSize: 15,
+		            }
+		        },
+		        title: {
+		            display: false,
+		            text: 'Expensess of {{chartData.month.0}}',
+		            fontSize:30,
+		            fontColor: '#E0E0E0',
+		            fontStyle:'normal',
+		        },
+	            responsive: true,
+			    maintainAspectRatio: false,
+			}
+
+			
+		});
+    </script>
+    <script>
+        var ctx = document.getElementById('Chart2').getContext('2d');
+        Chart.defaults.global.defaultFontColor = '#E0E0E0';
+        Chart.defaults.global.defaultFontSize = 10;
+		var chart = new Chart(ctx, {
+		    // The type of chart we want to create
+		    type: 'bar',
+
+		    // The data for our dataset
+		    data: {
+		        labels: {{ chartData.income.data1.labels|safe }},
+		        datasets: [{
+			            label: '{{chartData.month.1}}',
+			            backgroundColor: "rgb(255, 99, 132)",
+			            borderColor: "#000",
+			            data: {{chartData.income.data2.data|safe }},
+		        	},
+			        {
+			            label: '{{chartData.month.0}}',
+			            backgroundColor: "#FFF",
+			            borderColor: "#000",
+			            data: {{chartData.income.data1.data|safe }},
+			        },
+		        ]
+		    },
+
+		    // Configuration options go here
+		    options: {
+		    	layout: {
+		            padding: {
+		                left: 5,
+		                right: 5,
+		                top: 10,
+		                bottom: 0,
+		          	}
+		        },
+		        legend: {
+		            display: true,
+		            position: 'bottom',
+		            Align:'end',
+		            labels: {
+		                fontColor: '#E0E0E0',
+		                boxWidth: 20,
+		                fontSize: 15,
+		                fontStyle:'normal',
+		            }
+		        },
+		        title: {
+		            display: true,
+		            text: 'Comparisation of {{chartData.month.0}} and {{chartData.month.1}}',
+		            fontSize:20,
+		            fontColor: '#E0E0E0',
+		            fontStyle:'normal',
+		        },
+		        barValueSpacing: 10,
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    min: 0,
+		                }
+		            }]
+		        },
+	            responsive: true,
+			    maintainAspectRatio: false,
+			}
+		});
+    </script>
+    <script>
+        var ctx = document.getElementById('Chart3').getContext('2d');
+        Chart.defaults.global.defaultFontColor = '#E0E0E0';
+        Chart.defaults.global.defaultFontSize = 10;
+		var chart = new Chart(ctx, {
+		    // The type of chart we want to create
+		    type: 'line',
+
+		    // The data for our dataset
+		    data: {
+		        labels: {{ chartData.dalyTransaction.labels|safe }},
+		        datasets: [{
+		            label: 'Daly Transiaction',
+		            //backgroundColor: '#F00',
+		            borderColor: "rgb(255, 99, 132)",
+		            data: {{chartData.dalyTransaction.data|safe }},
+		        	},
+		        	{
+		            label: 'Balance',
+		            //backgroundColor: '#F00',
+		            borderColor: "#FFF",
+		            data: {{chartData.dalyTransaction.data1|safe }},
+		        	},
+		        ]
+		    },
+
+		    // Configuration options go here
+		    options: {
+		    	layout: {
+		            padding: {
+		                left: 5,
+		                right: 5,
+		                top: 5,
+		                bottom: 5,
+		          	}
+		        },
+		        legend: {
+		            display: true,
+		            position: 'bottom',
+		            Align:'center',
+		            labels: {
+		                fontColor: '#E0E0E0',
+		                boxWidth: 3,
+		                fontSize: 15,
+		                fontStyle:'normal',
+		            }
+		        },
+		        title: {
+		            display: true,
+		            text: 'Daily Transaction Summary ',
+		            fontSize:20,
+		            fontColor: '#E0E0E0',
+		            fontStyle:'normal',
+		        },
+	            responsive: true,
+			    maintainAspectRatio: false,
+			}
+		});
+    </script>

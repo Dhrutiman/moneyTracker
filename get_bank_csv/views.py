@@ -17,10 +17,11 @@ from django.views.generic.edit import UpdateView
 def uplode_csv(request):
 	template="get_bank_csv/csvUplode.html"
 
-	#messages=[]
+	messages=[]
 
 	prompt={
-		'order':"Uplode CSV file of bank statement"
+		'order':"The order of columns should be [Date and Time , Check No , Description , Bank Code , Debit , Credit , Balance]",
+		'statement': "Uplode CSV file of bank statement",
 	}
 
 	if request.method == 'GET':
@@ -63,7 +64,7 @@ def uplode_csv(request):
 			 	)
 
 		except Exception as e:
-			print(_data.id)
+			# print(_data.id)
 			messages.append(_data.id +'| is not been saved|')
 
 	context={

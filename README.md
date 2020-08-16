@@ -1,6 +1,6 @@
-# MoneyTracker 
+# Money Tracker 
 
-![Project Image](project-image-url)
+![Project Image](static/images/moneyTrackerHomePage.png?raw=true "Home Page")
 
 > This is a ReadMe
 
@@ -18,15 +18,18 @@ You're sections headers will be used to reference location of destination.
 ---
 
 ## Description
-
+moneyTracker is a money tracking web app. Here anyone can upload his/her’s bank transaction statement as a CSV file. 
 
 
 #### Technologies
 
-- Technology 1
-- Technology 2
+- Python 3.7
+- Django 3.0.8
+- Bootstrap
+- HTML and CSS
+- Chart.js
 
-[Back To The Top](#MoneyTracker )
+[Back To The Top](#Money-Tracker )
 
 ---
 

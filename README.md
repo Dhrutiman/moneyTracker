@@ -40,7 +40,7 @@ moneyTracker is a money tracking web app. Which provide us with our monthly expe
 
 #### API Reference
 
-```cmd
+```posh 
 (dhruti) C:\Myproject\website\bank_app\moneyApp>python manage.py runserver
 Watching for file changes with StatReloader
 Performing system checks...

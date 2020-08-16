@@ -40,17 +40,7 @@ moneyTracker is a money tracking web app. Which provide us with our monthly expe
 
 #### API Reference
 
-```console
-(dhruti) C:\Myproject\website\bank_app\moneyApp>python manage.py runserver
-Watching for file changes with StatReloader
-Performing system checks...
 
-System check identified no issues (0 silenced).
-August 16, 2020 - 22:46:08
-Django version 3.0.8, using settings 'moneyApp.settings'
-Starting development server at http://127.0.0.1:8000/
-Quit the server with CTRL-BREAK.
-```
 [Back To The Top](#Money-Tracker )
 
 ---

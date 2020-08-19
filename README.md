@@ -11,7 +11,6 @@ You're sections headers will be used to reference location of destination.
 
 - [Description](#description)
 - [How To Use](#how-to-use)
-- [References](#references)
 - [License](#license)
 - [Author Info](#author-info)
 
@@ -19,6 +18,8 @@ You're sections headers will be used to reference location of destination.
 
 ## Description
 moneyTracker is a money tracking web app. Which provide us with our monthly expenses, daily transactions, and other information in a gook looking graph and charts. For that, we have to upload our bank transaction statement as a CSV file and add category and subject to each entered transactions to show in our homepage.
+
+>NOTE: This app is not going to be host online.
 
 #### Technologies
 
@@ -35,20 +36,31 @@ moneyTracker is a money tracking web app. Which provide us with our monthly expe
 ## How To Use
 
 #### Installation
+First, clone the GitHub repo and run the [requirements.txt](requirements.txt) file in the main project directory (moneytracher) to import all required liberals and dependency.
+```posh
+(dhruti) C:\Myproject\moneyTracker>pip install -r requirements.txt
+```
+Now start up the Django server and open the [localhost](http://127.0.0.1:8000/) url in your browser.
 
+```posh 
+(dhruti) C:\Myproject\moneyTracker>python manage.py runserver
+```
+First to use the app, you have to create a super-user for login and other function.
 
+```posh 
+(dhruti) C:\Myproject\moneyTracker>python manage.py createsuperuser
+```
+#### Adding transaction to database
+In the browser navigate to get_csv/upload and upload a bank statement in csv formate. Then add category to all the recent transiction you have uplode.
 
-#### API Reference
+![Project Image](static/images/monetTrackerUplodeCSV?raw=true "UplodeCSvPage")
 
+![Project Image](static/images/moneyTrackerAddCategoryTotransiction.png?raw=true "AddCategoryPage")
 
 [Back To The Top](#Money-Tracker )
 
 ---
 
-## References
-[Back To The Top](#Money-Tracker )
-
----
 
 ## License
 
@@ -80,7 +92,6 @@ SOFTWARE.
 
 ## Author Info
 
-- Twitter - 
-- Website - 
+- LinkedIn - 
 
 [Back To The Top](#Money-Tracker )

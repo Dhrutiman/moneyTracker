@@ -53,7 +53,7 @@ First to use the app, you have to create a super-user for login and other functi
 #### Adding transaction to database
 In the browser navigate to get_csv/upload and upload a bank statement in csv formate. Then add category to all the recent transiction you have uplode.
 
-![Project Image](static/images/monetTrackerUplodeCSV?raw=true "UplodeCSvPage")
+![Project Image](static/images/monetTrackerUplodeCSV.png?raw=true "UplodeCSvPage")
 
 ![Project Image](static/images/moneyTrackerAddCategoryTotransiction.png?raw=true "AddCategoryPage")
 
